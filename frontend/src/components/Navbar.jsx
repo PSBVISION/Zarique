@@ -5,8 +5,11 @@ const Navbar = () => {
   const [visible, setVisible] = useState(false);
   return (
     <nav className="flex items-center justify-between py-5 font-medium">
-      <img src={assets.logo} alt="logo" className="w-20" />
-      <ul className="hidden sm:flex gap-11 text-2xl text-gray-700">
+      <div className="flex items-center  gap-2 text-3xl prata-regular">
+      <img src={assets.logo} alt="logo" className="w-8 pb-1" />
+      ZariQue
+</div>
+      <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
         <NavLink className="flex flex-col items-center gap-1" to="/">
           <p>HOME</p>
           <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
@@ -28,13 +31,13 @@ const Navbar = () => {
         <img
           src={assets.search_icon}
           alt="serach icon"
-          className="w-7 cursor-pointer"
+          className="w-5 cursor-pointer"
         />
         <div className="group relative">
           <img
             src={assets.profile_icon}
             alt="profile "
-            className="w-7 cursor-pointer"
+            className="w-5 cursor-pointer"
           />
           <div className="group-hover:block hidden absolute dropdown-menu right-0 pt-4">
             <div className=" flex flex-col gap-2 w-42 py-3 px-5 bg-slate-100 text-gray-500 text-xl rounded">
