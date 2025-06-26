@@ -74,14 +74,14 @@ const Navbar = () => {
             <img
               src={assets.dropdown_icon}
               alt="sidebar closer"
-              className="h-6 rotate-180"
+              className="h-4 rotate-180"
             />
-            <p className="text-xl">Back</p>
+            <p>Back</p>
           </div>
-          <NavLink className="py-4 pl-6 border-b-2" onClick={()=>setVisible(false)} to={'/'}>HOME</NavLink>
-          <NavLink className="py-4 pl-6 border-b-2" onClick={()=>setVisible(false)} to={'/collection'}>COLLECTION</NavLink>
-          <NavLink className="py-4 pl-6 border-b-2" onClick={()=>setVisible(false)} to={'/about'}>ABOUT</NavLink>
-          <NavLink className="py-4 pl-6 border-b-2" onClick={()=>setVisible(false)} to={'/contact'}>CONTACT</NavLink>
+          <NavLink className="py-2 pl-6 border-b-1" onClick={()=>setVisible(false)} to={'/'}>HOME</NavLink>
+          <NavLink className="py-2 pl-6 border-b-1" onClick={()=>setVisible(false)} to={'/collection'}>COLLECTION</NavLink>
+          <NavLink className="py-2 pl-6 border-b-1" onClick={()=>setVisible(false)} to={'/about'}>ABOUT</NavLink>
+          <NavLink className="py-2 pl-6 border-b-1" onClick={()=>setVisible(false)} to={'/contact'}>CONTACT</NavLink>
         </div>
       </div>
     </nav>
