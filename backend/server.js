@@ -9,12 +9,13 @@ import userRouter from './routes/user.route.js';
 const app = express();
 const port = process.env.PORT || 5000;
 
+// Middlewares - must be before routes
+app.use(cors());
+app.use(express.json());
 
+//connections
 connectDB();
 connectCloudinary();
-// Middlewares
-app.use(express.json());
-app.use(cors());
 
 //api endpoints
 app.use('/api/user', userRouter)
@@ -24,5 +25,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}`);
+  console.log(`Listening at http://localhost: ${port}`);
 })

@@ -1,7 +1,32 @@
-import userModel from "../models/user.model";
+import userModel from "../models/user.model.js";
+import bycrypt from "bcrypt";
 import validator from "validator"
+import jwt from "jsonwebtoken"
+
+const createToken = (id) =>{
+  return jwt.sign({id},process.env.JWT_SECRET)
+}
+
 //Route for user login
-const loginUser = async (req, res) => {};
+const loginUser = async (req, res) => {
+  try {
+    const {email, password }= req.body;
+    const user = await userModel.findOne({email});
+    if(!user){
+      return res.json({success:false, message:"User not found"})
+    }
+    const isMatch = await bycrypt.compare(password, user.password);
+    if(isMatch){
+      const token = createToken(user._id);
+      res.json({success:true, message:"User logged in successfully", token})
+    }else{
+      res.json({success:false, message:"Invalid credentials"})
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
 
 //Route for user registration
 const registerUser = async (req, res) => {
@@ -19,10 +44,28 @@ const registerUser = async (req, res) => {
     if(!validator.isEmail(email)){
       return res.json({success:false, message:"please enter valid email"})
     }
-    if(!validator.isEmail(email)){
-      return res.json({success:false, message:"please enter valid email"})
+    if(password.length<8){
+      return res.json({success:false, message:"please enter a strong password"})
     }
-  } catch (error) {}
+    //hashing user password
+    const salt = await bycrypt.genSalt(10);
+    const hashedPassword = await bycrypt.hash(password, salt);
+    
+    const newUser = new userModel({
+      name,
+      email,
+      password: hashedPassword,
+    })
+
+    const user = await newUser.save();
+
+    const token = createToken(user._id)
+    res.json({success:true, message:"User registered successfully", token})
+
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
 };
 
 //Route for admin login
